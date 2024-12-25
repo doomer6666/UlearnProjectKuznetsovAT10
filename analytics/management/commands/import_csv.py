@@ -34,7 +34,7 @@ class Command(BaseCommand):
                     current_row += 1
                     if any(keyword.lower() in row['name'].lower() for keyword in keywords):
                         published_at = datetime.strptime(row['published_at'], '%Y-%m-%dT%H:%M:%S%z')
-                        Vacancy.objects.update_or_create(
+                        Vacancy.objects.create(
                             name=row['name'],
                             defaults={
                                 'key_skills': row['key_skills'] if row['key_skills'] else '',
