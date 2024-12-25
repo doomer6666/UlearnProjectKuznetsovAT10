@@ -1,14 +1,15 @@
 <!-- analytics/templates/analytics/base.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Мой проект{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Подключение стилей -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Подключение стилей -->
 </head>
 <body>
 <header>
-    <h1>Название проекта</h1> <!-- Логотип -->
+    <h1>Аналитика профессии системный администратор</h1> <!-- Логотип -->
 </header>
 
 <nav>
@@ -27,7 +28,7 @@
 </main>
 
 <footer>
-    <p>ФИО студента, академическая группа</p> <!-- Подвал -->
+    <p>Кузнецов Евгений Валерьевич, РИ-230950/АТ-10</p> <!-- Подвал -->
 </footer>
 </body>
 </html>
