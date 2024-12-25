@@ -1,4 +1,3 @@
-<!-- analytics/templates/analytics/base.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
@@ -12,20 +11,22 @@
     <h1>Аналитика профессии системный администратор</h1> <!-- Логотип -->
 </header>
 
-<nav>
-    <ul>
-        <li><a href="{% url 'home' %}">Главная</a></li>
-        <li><a href="{% url 'statistics' %}">Общая статистика</a></li>
-        <li><a href="{% url 'demand' %}">Востребованность</a></li>
-        <li><a href="{% url 'geography' %}">География</a></li>
-        <li><a href="{% url 'skills' %}">Навыки</a></li>
-        <li><a href="{% url 'latest_vacancies' %}">Последние вакансии</a></li>
-    </ul>
-</nav>
+<div>
+    <nav class="sidebar">
+        <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'statistics' %}">Общая статистика</a></li>
+            <li><a href="{% url 'demand' %}">Востребованность</a></li>
+            <li><a href="{% url 'geography' %}">География</a></li>
+            <li><a href="{% url 'skills' %}">Навыки</a></li>
+            <li><a href="{% url 'latest_vacancies' %}">Последние вакансии</a></li>
+        </ul>
+    </nav>
 
-<main>
-    {% block content %}{% endblock %}
-</main>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</div>
 
 <footer>
     <p>Кузнецов Евгений Валерьевич, РИ-230950/АТ-10</p> <!-- Подвал -->

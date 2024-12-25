@@ -1,3 +1,5 @@
+/* analytics/static/css/style.css */
+
 /* Основные стили */
 body {
     font-family: Arial, sans-serif;
@@ -5,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    overflow-x: hidden;
 }
 
 /* Шапка */
@@ -13,53 +16,64 @@ header {
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
+    z-index: 1;
 }
 
 header h1 {
     margin: 0;
+    font-size:40px;
+    position: relative;
+    left: 160px;
+}
+h2 {
+    font-size:40px;
+    text-align: center;
+}
+p{
+   font-size:25px;
+}
+/* Контейнер для навигации и основного контента */
+.container {
+    display: flex; /* Используем Flexbox для расположения */
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    gap:1.5em;
 }
 
-/* Навигационное меню */
-nav {
-    background: #35424a;
+/* Левое меню */
+.sidebar {
+    width: 160px; /* Увеличиваем ширину бокового меню */
+    background-color: #35424a; /* Цвет фона бокового меню */
+    padding: 15px; /* Отступы внутри бокового меню */
+    position: fixed; /* Фиксируем меню слева */
+    top: 0;
+    height: 100%;
+    z-index: 0;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.sidebar ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
 }
 
-nav ul li {
-    display: inline; /* Горизонтальное расположение */
-    margin-right: 20px;
+.sidebar ul li {
+    margin-bottom: 10px; /* Отступ между элементами списка */
 }
 
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
+.sidebar ul li a {
+    color: #ffffff; /* Цвет текста ссылок */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
 }
 
 /* Основной контент */
 main {
-    padding: 20px;
-}
-
-/* Таблицы */
-table {
-    width: 100%;
-    border-collapse: collapse; /* Убирает двойные границы */
-    margin-bottom: 20px; /* Отступ снизу */
-}
-
-table th, table td {
-    border: 1px solid #dddddd; /* Граница ячеек */
-    text-align: left; /* Выравнивание текста по левому краю */
-    padding: 8px; /* Отступы внутри ячеек */
-}
-
-table th {
-    background-color: #35424a; /* Цвет фона заголовков таблицы */
-    color: #ffffff; /* Цвет текста заголовков таблицы */
+    margin-left: 270px; /* Добавляем отступ слева, чтобы основной контент не перекрывался меню */
+    padding: 20px; /* Отступы внутри основного контента */
 }
 
 /* Подвал */
@@ -68,4 +82,36 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 10px 0;
+}
+
+footer p{
+    font-size: 20px;
+    position: relative;
+    left: 160px;
+}
+
+/* Стили для таблиц */
+table {
+    width: 100%; /* Ширина таблицы на всю ширину контейнера */
+    border-collapse: collapse; /* Убирает двойные границы */
+    margin-bottom: 20px; /* Отступ снизу для разделения таблиц */
+}
+
+th, td {
+    border: 1px solid #dddddd; /* Граница ячеек */
+    text-align: left; /* Выравнивание текста по левому краю */
+    padding: 8px; /* Отступы внутри ячеек */
+}
+
+th {
+    background-color: #35424a; /* Цвет фона заголовков таблицы */
+    color: #ffffff; /* Цвет текста заголовков таблицы */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Цвет фона для четных строк */
+}
+
+tr:hover {
+    background-color: #e0e0e0; /* Цвет фона при наведении на строку */
 }
