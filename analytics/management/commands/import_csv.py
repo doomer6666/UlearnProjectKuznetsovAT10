@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from analytics.models import Vacancy
 from datetime import datetime
 
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('csv_file', type=str, help='The path to the CSV file to import')

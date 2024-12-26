@@ -9,5 +9,8 @@ class Vacancy(models.Model):
     area_name = models.CharField(max_length=100)
     published_at = models.DateTimeField()
 
+    class Meta:
+        verbose_name_plural = "Vacancies"
+
     def __str__(self):
         return self.name

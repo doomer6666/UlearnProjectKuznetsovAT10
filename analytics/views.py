@@ -5,6 +5,7 @@ from datetime import datetime
 from collections import Counter
 import requests
 
+
 def index(request):
     return render(request,'analytics/index.html')
 
