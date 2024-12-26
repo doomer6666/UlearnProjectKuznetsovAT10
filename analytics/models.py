@@ -14,3 +14,14 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Currency(models.Model):
+    date = models.DateField(max_length=8)
+    currency_code = models.CharField(max_length=3)
+    currency = models.FloatField()
+
+    class Meta:
+        unique_together = ('date', 'currency_code')
+        verbose_name_plural = 'Currency Rates'
+        db_table = 'currencies'

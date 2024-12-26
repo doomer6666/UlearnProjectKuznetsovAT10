@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from .models import Vacancy
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, F, Q
 from datetime import datetime
 from collections import Counter
 import requests
 
 
 def index(request):
-    return render(request,'analytics/index.html')
+    return render(request, 'analytics/index.html')
 
 
 def get_currency_rate(currency, date):
@@ -24,7 +24,7 @@ def statistics(request):
     # Динамика уровня зарплат по годам
     salary_trends = (
         vacancies.values('published_at__year')
-        .annotate(avg_salary=Avg('salary_from'))
+        .annotate(avg_salary=Avg(F('salary_from') + F('salary_to')) / 2)
         .order_by('published_at__year')
     )
 
@@ -38,7 +38,7 @@ def statistics(request):
     # Уровень зарплат по городам с конвертацией в рубли
     salary_by_area = (
         vacancies.values('area_name')
-        .annotate(avg_salary=Avg('salary_from'))
+        .annotate(avg_salary=Avg((F('salary_from') + F('salary_to')) / 2))
         .order_by('-avg_salary')
     )
 
@@ -78,14 +78,18 @@ def statistics(request):
 
     return render(request, 'analytics/statistics.html', context)
 
+
 def demand(request):
     return render(request, 'analytics/demand.html')
+
 
 def geography(request):
     return render(request, 'analytics/geography.html')
 
+
 def skills(request):
     return render(request, 'analytics/skills.html')
+
 
 def latest_vacancies(request):
     return render(request, 'analytics/latest_vacancies.html')
