@@ -6,7 +6,7 @@
 <h2>Востребованность</h2>
 
 <h3>Динамика уровня зарплат по годам</h3>
-<div style="display: flex;">
+<div class="row">
     <table>
         <thead>
             <tr>
@@ -23,24 +23,27 @@
             {% endfor %}
         </tbody>
     </table>
-    <img src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат" height="700px" style="margin-left: 20px;">
+    <img src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат" height="700px">
 </div>
 
 <h3>Динамика количества вакансий по годам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Год</th>
-            <th>Количество вакансий</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in vacancy_trends %}
-        <tr>
-            <td>{{ item.year }}</td>
-            <td>{{ item.count }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row">
+    <table>
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Количество вакансий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in vacancy_trends %}
+            <tr>
+                <td>{{ item.year }}</td>
+                <td>{{ item.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<img src="{% static 'img/vac_count_trend_plot.png' %}" alt="График количества вакансий" height="700px">
+</div>
 {% endblock %}

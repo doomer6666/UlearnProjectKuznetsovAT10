@@ -34,11 +34,14 @@ p{
 }
 /* Контейнер для навигации и основного контента */
 .container {
-    display: flex; /* Используем Flexbox для расположения */
+    display: flex;
     flex-direction: column;
     justify-content:center;
     align-items: center;
     gap:1.5em;
+}
+.row{
+    display: flex;
 }
 
 /* Левое меню */
@@ -92,7 +95,8 @@ footer p{
 
 /* Стили для таблиц */
 table {
-    width: 100%; /* Ширина таблицы на всю ширину контейнера */
+    width: 30%;
+    max-width: 30%; /* Ширина таблицы на всю ширину контейнера */
     border-collapse: collapse; /* Убирает двойные границы */
     margin-bottom: 20px; /* Отступ снизу для разделения таблиц */
 }

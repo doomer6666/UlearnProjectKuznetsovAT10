@@ -81,8 +81,6 @@ def demand(request):
     return render(request, 'analytics/demand.html', context)
 
 
-
-
 def geography(request):
     return render(request, 'analytics/geography.html')
 
