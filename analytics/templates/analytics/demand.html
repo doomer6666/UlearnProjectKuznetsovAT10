@@ -5,22 +5,25 @@
 <h2>Востребованность</h2>
 
 <h3>Динамика уровня зарплат по годам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Год</th>
-            <th>Средняя зарплата</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in salary_trends %}
-        <tr>
-            <td>{{ item.year }}</td>
-            <td>{{ item.avg_salary }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div style="display: flex;">
+    <table>
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Средняя зарплата</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in salary_trends %}
+            <tr>
+                <td>{{ item.year }}</td>
+                <td>{{ item.avg_salary }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат" style="margin-left: 20px;">
+</div>
 
 <h3>Динамика количества вакансий по годам</h3>
 <table>
@@ -33,7 +36,7 @@
     <tbody>
         {% for item in vacancy_trends %}
         <tr>
-            <td>{{ item.published_at__year }}</td> <!-- Это остается без изменений -->
+            <td>{{ item.published_at__year }}</td>
             <td>{{ item.count }}</td>
         </tr>
         {% endfor %}

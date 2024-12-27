@@ -28,7 +28,7 @@ class Currency(models.Model):
 
 class SalaryByYear(models.Model):
     year = models.CharField(max_length=4)
-    avg_rate = models.FloatField()
+    avg_salary = models.FloatField()
     class Meta:
         verbose_name_plural = "Currency Statistics"
         db_table = 'currency_statistics'
