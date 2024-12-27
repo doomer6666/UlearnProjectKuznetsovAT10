@@ -1,6 +1,6 @@
 from django.db.models.functions import Substr, Round
 from django.shortcuts import render
-from .models import Vacancy, Currency, SalaryByYear
+from .models import Vacancy, Currency, SalaryByYear, VacanciesCountByYear
 from django.db.models import Avg, Count, F, Q
 from collections import Counter
 
@@ -73,11 +73,10 @@ def statistics(request):
 
 def demand(request):
     salary_trends = SalaryByYear.objects.all()
-
+    vacancy_trends = VacanciesCountByYear.objects.all()
     context = {
-        'first_parameter': 'avg_salary',
-        'second_parameter': 'year',
         'salary_trends': salary_trends,
+        'vacancy_trends':vacancy_trends,
     }
     return render(request, 'analytics/demand.html', context)
 

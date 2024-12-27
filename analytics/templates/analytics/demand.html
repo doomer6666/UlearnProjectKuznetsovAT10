@@ -1,4 +1,5 @@
 {% extends "analytics/sample.html" %}
+{% load static %}
 {% block title %}Востребованность{% endblock %}
 
 {% block content %}
@@ -22,7 +23,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <img src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат" style="margin-left: 20px;">
+    <img src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат" height="700px" style="margin-left: 20px;">
 </div>
 
 <h3>Динамика количества вакансий по годам</h3>
@@ -36,7 +37,7 @@
     <tbody>
         {% for item in vacancy_trends %}
         <tr>
-            <td>{{ item.published_at__year }}</td>
+            <td>{{ item.year }}</td>
             <td>{{ item.count }}</td>
         </tr>
         {% endfor %}

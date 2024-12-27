@@ -26,9 +26,20 @@ class Currency(models.Model):
         verbose_name_plural = 'Currency Rates'
         db_table = 'currencies'
 
+
 class SalaryByYear(models.Model):
     year = models.CharField(max_length=4)
     avg_salary = models.FloatField()
+
     class Meta:
         verbose_name_plural = "Currency Statistics"
         db_table = 'currency_statistics'
+
+
+class VacanciesCountByYear(models.Model):
+    year = models.CharField(max_length=4)
+    count = models.IntegerField()
+
+    class Meta:
+        verbose_name_plural = "Vacancy Count Statistics"
+        db_table = 'vacancies_count_by_year'
