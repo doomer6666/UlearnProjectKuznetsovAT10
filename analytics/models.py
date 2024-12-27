@@ -25,3 +25,10 @@ class Currency(models.Model):
         unique_together = ('date', 'currency_code')
         verbose_name_plural = 'Currency Rates'
         db_table = 'currencies'
+
+class SalaryByYear(models.Model):
+    year = models.CharField(max_length=4)
+    avg_rate = models.FloatField()
+    class Meta:
+        verbose_name_plural = "Currency Statistics"
+        db_table = 'currency_statistics'
