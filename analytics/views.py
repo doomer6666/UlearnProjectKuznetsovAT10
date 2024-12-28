@@ -1,6 +1,6 @@
 from django.db.models.functions import Substr, Round
 from django.shortcuts import render
-from .models import Vacancy, Currency, SalaryByYear, VacanciesCountByYear
+from .models import Vacancy, Currency, SalaryByYear, VacanciesCountByYear, SalaryByCity
 from django.db.models import Avg, Count, F, Q
 from collections import Counter
 
@@ -82,7 +82,12 @@ def demand(request):
 
 
 def geography(request):
-    return render(request, 'analytics/geography.html')
+    salary_by_city = SalaryByCity.objects.all()
+    context = {
+        'salary_by_area':salary_by_city,
+    }
+
+    return render(request, 'analytics/geography.html',context)
 
 
 def skills(request):

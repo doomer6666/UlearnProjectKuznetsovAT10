@@ -43,3 +43,12 @@ class VacanciesCountByYear(models.Model):
     class Meta:
         verbose_name_plural = "Vacancy Count Statistics"
         db_table = 'vacancies_count_by_year'
+
+
+class SalaryByCity(models.Model):
+    area_name = models.CharField(max_length=100)
+    avg_salary = models.FloatField()
+
+    class Meta:
+        verbose_name_plural = "SalaryByCity Statistics"
+        db_table = 'salary_by_city_statistics'

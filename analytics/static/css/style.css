@@ -29,6 +29,12 @@ h2 {
     font-size:40px;
     text-align: center;
 }
+
+h3 {
+    text-align: center;
+    font-size:25px;
+}
+
 p{
    font-size:25px;
 }
@@ -41,7 +47,7 @@ p{
     gap:1.5em;
 }
 .row{
-    display: flex;
+    flex-direction: row;
 }
 
 /* Левое меню */
@@ -95,8 +101,7 @@ footer p{
 
 /* Стили для таблиц */
 table {
-    width: 30%;
-    max-width: 30%; /* Ширина таблицы на всю ширину контейнера */
+    width:40%
     border-collapse: collapse; /* Убирает двойные границы */
     margin-bottom: 20px; /* Отступ снизу для разделения таблиц */
 }
@@ -118,4 +123,9 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #e0e0e0; /* Цвет фона при наведении на строку */
+}
+
+.plot {
+    width:70%;
+    height:60%
 }
