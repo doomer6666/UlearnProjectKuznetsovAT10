@@ -96,6 +96,8 @@ def geography(request):
 
 def skills(request):
     skills_by_year = {}
+    images_by_year = {}
+
     for skill in Skill.objects.all().order_by('year'):
         if skill.year not in skills_by_year:
             skills_by_year[skill.year] = []
@@ -104,8 +106,16 @@ def skills(request):
     # Сортировка навыков по количеству в каждом году
     for year in skills_by_year:
         skills_by_year[year].sort(key=lambda x: x.count, reverse=True)
+        images_by_year[year] = f'img/skills_{year}_plot.png'  # Путь к изображению
 
-    return render(request, 'analytics/skills.html', {'top_skills_by_year': skills_by_year})
+    return render(request, 'analytics/skills.html', {
+        'top_skills_by_year': skills_by_year,
+        'images_by_year': images_by_year
+    })
+
+
+
+
 
 
 

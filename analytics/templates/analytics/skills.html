@@ -1,28 +1,33 @@
 {% extends "analytics/sample.html" %}
 {% load static %}
+{% load custom_filters %}  {# Загрузка вашего пользовательского фильтра #}
 {% block title %}Навыки{% endblock %}
 
 {% block content %}
 <h3>ТОП-20 навыков по годам</h3>
 
 {% for year, skills in top_skills_by_year.items %}
-<h4>{{ year }} год:</h4>
+<h3>{{ year }} год:</h3>
 <div class="container row">
-    <table>
-        <thead>
-            <tr>
-                <th>Навык</th>
-                <th>Количество</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for skill in skills %}
-        <tr>
-            <td>{{ skill.name }}</td>
-            <td>{{ skill.count }}</td>
-        </tr>{% endfor %}</tbody>
-    </table>
-    <img src="{% static 'img/skills_{{ year }}_plot.png' %}" alt="Топ 20 навыков {{ year }} года">
+    <div class="col">
+        <table>
+            <thead>
+                <tr>
+                    <th>Навык</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for skill in skills %}
+                <tr>
+                    <td>{{ skill.name }}</td>
+                    <td>{{ skill.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <img src="{% static images_by_year|get_item:year %}" alt="Топ 20 навыков {{ year }} года">
 </div>
 {% endfor %}
 
