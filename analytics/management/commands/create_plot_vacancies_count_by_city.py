@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from analytics.models import VacanciesCountByCity
-import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 

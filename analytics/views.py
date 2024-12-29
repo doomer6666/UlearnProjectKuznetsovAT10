@@ -1,6 +1,7 @@
+import re
 from django.db.models.functions import Substr, Round
 from django.shortcuts import render
-from .models import Vacancy, Currency, SalaryByYear, VacanciesCountByYear, SalaryByCity, VacanciesCountByCity
+from .models import Vacancy, Currency, SalaryByYear, VacanciesCountByYear, SalaryByCity, VacanciesCountByCity, Skill
 from django.db.models import Avg, Count, F, Q
 from collections import Counter
 
@@ -94,7 +95,18 @@ def geography(request):
 
 
 def skills(request):
-    return render(request, 'analytics/skills.html')
+    skills_by_year = {}
+    for skill in Skill.objects.all().order_by('year'):
+        if skill.year not in skills_by_year:
+            skills_by_year[skill.year] = []
+        skills_by_year[skill.year].append(skill)
+
+    # Сортировка навыков по количеству в каждом году
+    for year in skills_by_year:
+        skills_by_year[year].sort(key=lambda x: x.count, reverse=True)
+
+    return render(request, 'analytics/skills.html', {'top_skills_by_year': skills_by_year})
+
 
 
 def latest_vacancies(request):

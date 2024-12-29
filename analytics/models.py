@@ -60,3 +60,13 @@ class VacanciesCountByCity(models.Model):
     class Meta:
         verbose_name_plural = "VacanciesCountByCity Statistics"
         db_table = 'vacancies_count_by_city_statistics'
+
+
+class Skill(models.Model):
+    year = models.IntegerField()
+    name = models.CharField(max_length=200)
+    count = models.IntegerField()
+
+    class Meta:
+        unique_together = ('year', 'name')
+        verbose_name_plural = "Skills"

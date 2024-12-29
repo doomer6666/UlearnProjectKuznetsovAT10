@@ -137,6 +137,22 @@ tr:hover {
     display: none;
 }
 
-button {
+button#loadMore {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
 
+button#loadMore:hover {
+    background-color: #45a049;
+}
+
+
+.loadMoreImg{
+    margin-top:5em;
 }
