@@ -52,3 +52,11 @@ class SalaryByCity(models.Model):
     class Meta:
         verbose_name_plural = "SalaryByCity Statistics"
         db_table = 'salary_by_city_statistics'
+
+class VacanciesCountByCity(models.Model):
+    area_name = models.CharField(max_length=100)
+    count = models.IntegerField()
+
+    class Meta:
+        verbose_name_plural = "VacanciesCountByCity Statistics"
+        db_table = 'vacancies_count_by_city_statistics'

@@ -23,26 +23,31 @@
             {% endfor %}
         </tbody>
     </table>
-    <img class="plot" src="{% static 'img/salary_by_city_plot.png' %}" alt="График уровня зарплат по городам">
+    <img src="{% static 'img/salary_by_city_plot.png' %}" alt="График уровня зарплат по городам">
 </div>
 
 <h3>Доля вакансий по городам</h3>
-<div class="container row">
-    <table>
-        <thead>
-            <tr>
-                <th>Город</th>
-                <th>Количество вакансий</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in vacancies_by_area %}
-            <tr>
-                <td>{{ item.area_name }}</td>
-                <td>{{ item.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container row start">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Количество вакансий</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in vacancies_by_area %}
+                <tr class="{% if forloop.counter > 15 %}hidden{% endif %}">
+                    <td>{{ item.area_name }}</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="loadMore">Читать дальше</button>
+    </div>
+    <img src="{% static 'img/vacancies_count_by_city_plot.png' %}" alt="График долей вакансий по городам">
 </div>
+<script src="{% static 'js/load-more.js' %}"></script>
 {% endblock %}

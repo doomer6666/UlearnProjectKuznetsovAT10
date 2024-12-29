@@ -50,6 +50,9 @@ p{
     flex-direction: row;
 }
 
+.start{
+    align-items: flex-start;
+}
 /* Левое меню */
 .sidebar {
     width: 160px; /* Увеличиваем ширину бокового меню */
@@ -128,4 +131,12 @@ tr:hover {
 .plot {
     width:70%;
     height:60%
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+
 }

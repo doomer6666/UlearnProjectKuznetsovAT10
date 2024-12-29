@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from analytics.models import SalaryByYear, SalaryByCity
+from analytics.models import SalaryByCity
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -21,10 +21,11 @@ def create_salary_trend_plot():
     df = pd.DataFrame(salary_by_city)
 
     # Создаем график
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 6))  # Устанавливаем размер графика
     plot_yearly_salaries(df, ax)
 
-    # Сохраняем график
+    # Сохраняем график с установленными границами
+    plt.tight_layout()
     plt.savefig('analytics/static/img/salary_by_city_plot.png')
     plt.show()
 
