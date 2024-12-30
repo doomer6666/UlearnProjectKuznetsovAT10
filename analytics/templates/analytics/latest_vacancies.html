@@ -1,1 +1,24 @@
 {% extends "analytics/sample.html" %}
+{% load static %}
+
+{% block title %}Последние вакансии{% endblock %}
+
+{% block content %}
+<h3>Последние вакансии</h3>
+<div class="jobs-list">
+    {% for job in jobs %}
+    <div class="job-item">
+        <h4>{{ job.name }}</h4>
+        <p><strong>Компания:</strong> {{ job.company }}</p>
+        <p><strong>Оклад:</strong> {{ job.salary|default_if_none:"Не указано" }}</p>
+        <p><strong>Регион:</strong> {{ job.region }}</p>
+        <p><strong>Дата публикации:</strong> {{ job.published_at }}</p>
+        <p><strong>Описание:</strong></p>
+        <p>{{ job.description|safe }}</p>
+        <p><strong>Навыки:</strong> {% if job.skills %}{{ job.skills }}{% else %}Не указано{% endif %}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

@@ -156,3 +156,40 @@ button#loadMore:hover {
 .loadMoreImg{
     margin-top:5em;
 }
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.job-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.job-item h4 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #35424a;
+}
+
+.job-item p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.job-item strong {
+    color: #000;
+}
+
+.job-item{
+    font-size: 20px !important;
+}
