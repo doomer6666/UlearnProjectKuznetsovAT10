@@ -1,100 +1,129 @@
 {% extends "analytics/sample.html" %}
-
+{% load static %}
+{% load custom_filters %}
 {% block title %}Общая статистика{% endblock %}
 
 {% block content %}
 <h2>Общая статистика</h2>
-
+{% block demand_block %}
 <h3>Динамика уровня зарплат по годам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Год</th>
-            <th>Средняя зарплата</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in salary_trends %}
-        <tr>
-            <td>{{ item.published_at__year }}</td>
-            <td>{{ item.avg_salary }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container row">
+    <table>
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Средняя зарплата</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in salary_trends %}
+            <tr>
+                <td>{{ item.year }}</td>
+                <td>{{ item.avg_salary }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img class="plot" src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат">
+</div>
 
 <h3>Динамика количества вакансий по годам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Год</th>
-            <th>Количество вакансий</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in vacancy_trends %}
-        <tr>
-            <td>{{ item.published_at__year }}</td>
-            <td>{{ item.count }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container row">
+    <table>
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Количество вакансий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in vacancy_trends %}
+            <tr>
+                <td>{{ item.year }}</td>
+                <td>{{ item.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img class="plot" src="{% static 'img/vac_count_trend_plot.png' %}" alt="График количества вакансий">
+</div>
+{% endblock %}
 
+{% block geography_block %}
 <h3>Уровень зарплат по городам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Город</th>
-            <th>Средняя зарплата</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in salary_by_area %}
-        <tr>
-            <td>{{ item.area_name }}</td>
-            <td>{{ item.avg_salary }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container row">
+    <table>
+        <thead>
+            <tr>
+                <th>Город</th>
+                <th>Средняя зарплата</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in salary_by_area %}
+            <tr>
+                <td>{{ item.area_name }}</td>
+                <td>{{ item.avg_salary }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img src="{% static 'img/salary_by_city_plot.png' %}" alt="График уровня зарплат по городам">
+</div>
 
 <h3>Доля вакансий по городам</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Город</th>
-            <th>Количество вакансий</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in vacancies_by_area %}
-        <tr>
-            <td>{{ item.area_name }}</td>
-            <td>{{ item.count }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container row start">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Город</th>
+                    <th>Количество вакансий</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in vacancies_by_area %}
+                <tr class="{% if forloop.counter > 15 %}hidden{% endif %}">
+                    <td>{{ item.area_name }}</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="loadMore">Читать дальше</button>
+    </div>
+    <img class="loadMoreImg" src="{% static 'img/vacancies_count_by_city_plot.png' %}" alt="График долей вакансий по городам">
+</div>
+<script src="{% static 'js/load-more.js' %}"></script>
+{% endblock %}
 
-<h3>ТОП-20 навыков по годам</h3>
-
+{% block skills_block %}
+{% block skill_h3 %}<h3>ТОП-20 навыков по годам</h3>{% endblock %}
 {% for year, skills in top_skills_by_year.items %}
-<h4>{{ year }} год:</h4>
-<table>
-    <thead>
-        <tr>
-            <th>Навык</th>
-            <th>Количество</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for skill, count in skills %}
-    <tr>
-        <td>{{ skill }}</td>
-        <td>{{ count }}</td>
-    </tr>{% endfor %}</tbody>
-</table>
+<h3>{{ year }} год:</h3>
+<div class="container row">
+    <div class="col">
+        <table>
+            <thead>
+                <tr>
+                    <th>Навык</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for skill in skills %}
+                <tr>
+                    <td>{{ skill.name }}</td>
+                    <td>{{ skill.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <img src="{% static images_by_year|get_item:year %}" alt="Топ 20 навыков {{ year }} года">
+</div>
 {% endfor %}
+
+{% endblock %}
 
 {% endblock %}

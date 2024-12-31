@@ -1,49 +1,10 @@
-{% extends "analytics/sample.html" %}
-{% load static %}
+{% extends "analytics/statistics.html" %}
+
 {% block title %}Востребованность{% endblock %}
 
 {% block content %}
-<h2>Востребованность</h2>
-
-<h3>Динамика уровня зарплат по годам</h3>
-<div class="container row">
-    <table>
-        <thead>
-            <tr>
-                <th>Год</th>
-                <th>Средняя зарплата</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in salary_trends %}
-            <tr>
-                <td>{{ item.year }}</td>
-                <td>{{ item.avg_salary }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <img class="plot" src="{% static 'img/salary_trend_plot.png' %}" alt="График уровня зарплат">
-</div>
-
-<h3>Динамика количества вакансий по годам</h3>
-<div class="container row">
-    <table>
-        <thead>
-            <tr>
-                <th>Год</th>
-                <th>Количество вакансий</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in vacancy_trends %}
-            <tr>
-                <td>{{ item.year }}</td>
-                <td>{{ item.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <img class="plot" src="{% static 'img/vac_count_trend_plot.png' %}" alt="График количества вакансий">
-</div>
+    <h2>Востребованность</h2>
+    {% block demand_block %}
+        {{ block.super }}
+    {% endblock %}
 {% endblock %}

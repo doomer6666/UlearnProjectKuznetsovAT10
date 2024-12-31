@@ -1,53 +1,10 @@
-{% extends "analytics/sample.html" %}
-{% load static %}
+{% extends "analytics/statistics.html" %}
+
 {% block title %}География{% endblock %}
 
 {% block content %}
-<h2>География</h2>
-
-<h3>Уровень зарплат по городам</h3>
-<div class="container row">
-    <table>
-        <thead>
-            <tr>
-                <th>Город</th>
-                <th>Средняя зарплата</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in salary_by_area %}
-            <tr>
-                <td>{{ item.area_name }}</td>
-                <td>{{ item.avg_salary }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <img src="{% static 'img/salary_by_city_plot.png' %}" alt="График уровня зарплат по городам">
-</div>
-
-<h3>Доля вакансий по городам</h3>
-<div class="container row start">
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Город</th>
-                    <th>Количество вакансий</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in vacancies_by_area %}
-                <tr class="{% if forloop.counter > 15 %}hidden{% endif %}">
-                    <td>{{ item.area_name }}</td>
-                    <td>{{ item.count }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <button id="loadMore">Читать дальше</button>
-    </div>
-    <img class="loadMoreImg" src="{% static 'img/vacancies_count_by_city_plot.png' %}" alt="График долей вакансий по городам">
-</div>
-<script src="{% static 'js/load-more.js' %}"></script>
+    <h2>География</h2>
+    {% block geography_block %}
+        {{ block.super }}
+    {% endblock %}
 {% endblock %}
