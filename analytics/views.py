@@ -103,6 +103,30 @@ def clean_description(description):
     return cleantext.strip()
 
 
+async def fetch_details(session, url):
+    async with session.get(url) as response:
+        return await response.json()
+
+def format_date(date_str):
+    date_obj = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+    return date_obj.strftime('%d-%m-%Y, %H:%M')
+
+def clean_description(description):
+    # Удаляем все <p> теги
+    cleanr = re.compile('<p>')
+    cleantext = re.sub(cleanr, '', description)
+    cleantext = re.sub(r'\s+', ' ', cleantext)
+    return cleantext.strip()
+
+def format_salary(salary_from, salary_to, currency):
+    if salary_from and salary_to:
+        return f"от {salary_from:,} до {salary_to:,} {currency}".replace(",", " ")
+    elif salary_from:
+        return f"от {salary_from:,} {currency}".replace(",", " ")
+    elif salary_to:
+        return f"до {salary_to:,} {currency}".replace(",", " ")
+    return "Не указано"
+
 async def get_recent_jobs(profession_queries):
     url = 'https://api.hh.ru/vacancies'
     params = {
@@ -127,13 +151,14 @@ async def get_recent_jobs(profession_queries):
         details = await asyncio.gather(*tasks)
         for detail_data in details:
             salary_from = detail_data['salary']['from'] if detail_data.get('salary') else None
+            salary_to = detail_data['salary']['to'] if detail_data.get('salary') else None
             currency = detail_data['salary']['currency'] if detail_data.get('salary') else 'RUR'
-            salary_in_rub = f"{salary_from} {currency}" if salary_from else 'Не указано'
+            formatted_salary = format_salary(salary_from, salary_to, currency)
 
             job = {
                 'name': detail_data['name'],
                 'company': detail_data['employer']['name'] if detail_data.get('employer') else 'Не указано',
-                'salary': salary_in_rub,
+                'salary': formatted_salary,
                 'region': detail_data['area']['name'],
                 'published_at': format_date(detail_data['published_at']),
                 'description': clean_description(detail_data.get('description', 'Нет описания')),
@@ -144,7 +169,6 @@ async def get_recent_jobs(profession_queries):
     unique_jobs = {(job['name'], job['company']): job for job in jobs}.values()
     return list(unique_jobs)
 
-
 async def latest_vacancies(request):
     profession_queries = [
         'Системный администратор', 'system admin', 'сисадмин', 'сис админ',
@@ -154,4 +178,5 @@ async def latest_vacancies(request):
     jobs = await get_recent_jobs(profession_queries)
 
     return render(request, 'analytics/latest_vacancies.html', {'jobs': jobs[:10]})
+
 
