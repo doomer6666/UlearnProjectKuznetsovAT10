@@ -183,13 +183,14 @@ button#loadMore:hover {
     color: #35424a;
 }
 
+.job-p {
+    color: #2c3b42;
+    font-style: italic;
+}
+
 .job-item p {
     margin: 5px 0;
     font-size: 20px;
-}
-
-.job-item strong {
-    color: #000;
 }
 
 .job-item {

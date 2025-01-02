@@ -177,6 +177,6 @@ async def latest_vacancies(request):
 
     jobs = await get_recent_jobs(profession_queries)
 
-    return render(request, 'analytics/latest_vacancies.html', {'jobs': jobs[:10]})
+    return render(request, 'analytics/latest_vacancies.html', {'jobs': jobs})
 
 

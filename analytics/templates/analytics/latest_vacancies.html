@@ -9,13 +9,13 @@
     {% for job in jobs %}
     <div class="job-item">
         <h4>{{ job.name }}</h4>
-        <p><strong>Компания:</strong> {{ job.company }}</p>
-        <p><strong>Оклад:</strong> {{ job.salary|default_if_none:"Не указано" }}</p>
-        <p><strong>Регион:</strong> {{ job.region }}</p>
-        <p><strong>Дата публикации:</strong> {{ job.published_at }}</p>
-        <p><strong>Описание:</strong></p>
+        <p><strong class="job-p">Компания:</strong> {{ job.company }}</p>
+        <p><strong class="job-p">Оклад:</strong> {{ job.salary|default_if_none:"Не указано" }}</p>
+        <p><strong class="job-p">Регион:</strong> {{ job.region }}</p>
+        <p><strong class="job-p">Дата публикации:</strong> {{ job.published_at }}</p>
+        <p><strong class="job-p">Описание:</strong></p>
         <p>{{ job.description|safe }}</p>
-        <p><strong>Навыки:</strong> {% if job.skills %}{{ job.skills }}{% else %}Не указано{% endif %}</p>
+        <p><strong class="job-p">Навыки:</strong> {% if job.skills %}{{ job.skills }}{% else %}Не указано{% endif %}</p>
     </div>
     {% endfor %}
 </div>
