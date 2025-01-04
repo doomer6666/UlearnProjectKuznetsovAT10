@@ -1,0 +1,259 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+/* Шапка */
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%; /* Обеспечивает 100% ширину */
+    box-sizing: border-box; /* Включаем padding в ширину */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 40px;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    font-size: 25px;
+}
+
+p {
+    font-size: 25px;
+}
+
+/* Контейнер для навигации и основного контента */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.start {
+    align-items: flex-start;
+}
+
+/* Левое меню */
+.sidebar {
+    width: 160px;
+    background-color: #35424a;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    z-index: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Основной контент */
+main {
+    margin-left: 200px;
+    padding: 20px;
+    box-sizing: border-box; /* Включаем padding в ширину */
+}
+
+/* Подвал */
+footer {
+    background-color: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%; /* Обеспечивает 100% ширину */
+    box-sizing: border-box; /* Включаем padding в ширину */
+}
+
+footer p {
+    font-size: 20px;
+}
+
+/* Стили для таблиц */
+table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #35424a;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}
+
+.plot {
+    width: 100%;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+button#loadMore {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+button#loadMore:hover {
+    background-color: #45a049;
+}
+
+.loadMoreImg {
+    margin-top: 5em;
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.job-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.job-item h4 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #35424a;
+}
+
+.job-p {
+    color: #2c3b42;
+    font-style: italic;
+}
+
+.job-item p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.job-item {
+    font-size: 20px !important;
+}
+
+/* Адаптивные стили */
+@media screen and (max-width: 768px) {
+    h1{
+        font-size:30px !important;
+    }
+
+    h2{
+        font-size:25px !important;
+        margin-top:0;
+    }
+
+    h3{
+        font-size:20px !important;
+    }
+
+    p{
+        font-size:15px !important;
+    }
+
+    nav.sidebar {
+        width: 100%;
+        height: auto;
+        position: relative !important;
+        font-size:9px;
+        padding:0;
+        padding-top:5px;
+    }
+
+    .sidebar ul {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    .container {
+        display:block;
+    }
+
+    table{
+        width:100%;
+    }
+
+    img{
+        width:100%;
+    }
+
+    header h1, footer p {
+        left: 0;
+        text-align: center;
+    }
+
+    .job-item {
+        width: 100%;
+        max-width: none;
+        font-size:15px !important;
+    }
+}
