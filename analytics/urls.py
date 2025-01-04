@@ -4,7 +4,7 @@ from .views import index, statistics, demand, geography, skills, latest_vacancie
 
 urlpatterns = [
     path('', index, name='home'),
-path('demand/', demand, name='demand'),
+    path('demand/', demand, name='demand'),
     path('statistics/', statistics, name='statistics'),
     path('geography/', geography, name='geography'),
     path('skills/', skills, name='skills'),
