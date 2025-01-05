@@ -14,8 +14,8 @@ header {
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
-    width: 100%; /* Обеспечивает 100% ширину */
-    box-sizing: border-box; /* Включаем padding в ширину */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header h1 {
@@ -44,10 +44,15 @@ p {
     justify-content: center;
     align-items: center;
     gap: 1.5em;
+    margin-bottom:4em;
 }
 
 .row {
+    display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    flex-wrap: nowrap;
 }
 
 .start {
@@ -87,7 +92,7 @@ p {
 main {
     margin-left: 200px;
     padding: 20px;
-    box-sizing: border-box; /* Включаем padding в ширину */
+    box-sizing: border-box;
 }
 
 /* Подвал */
@@ -96,8 +101,8 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 10px 0;
-    width: 100%; /* Обеспечивает 100% ширину */
-    box-sizing: border-box; /* Включаем padding в ширину */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer p {
@@ -107,7 +112,7 @@ footer p {
 /* Стили для таблиц */
 table {
     width: 100%;
-    max-width: 1000px;
+    max-width: 800px;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -132,15 +137,28 @@ tr:hover {
 }
 
 .plot {
-    width: 100%;
+    max-width: calc(100% - 20px);
+    width: auto;
     height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+/* Обеспечивает, что изображение сначала будет переходить вниз */
+img {
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
 }
 
 .hidden {
     display: none;
 }
 
-button#loadMore {
+button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -151,12 +169,20 @@ button#loadMore {
     transition: background-color 0.3s;
 }
 
-button#loadMore:hover {
+button:hover {
     background-color: #45a049;
 }
 
-.loadMoreImg {
-    margin-top: 5em;
+.content-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.loadMore {
+    margin-top: 10px;
 }
 
 .jobs-list {
@@ -174,7 +200,6 @@ button#loadMore:hover {
     width: 80%;
     max-width: 800px;
     padding: 20px;
-    margin-bottom: 20px;
 }
 
 .job-item h4 {
@@ -198,31 +223,38 @@ button#loadMore:hover {
 }
 
 /* Адаптивные стили */
+@media screen and (max-width: 1200px) {
+    .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 @media screen and (max-width: 768px) {
-    h1{
-        font-size:30px !important;
+    h1 {
+        font-size: 30px !important;
     }
 
-    h2{
-        font-size:25px !important;
-        margin-top:0;
+    h2 {
+        font-size: 25px !important;
+        margin-top: 0;
     }
 
-    h3{
-        font-size:20px !important;
+    h3 {
+        font-size: 20px !important;
     }
 
-    p{
-        font-size:15px !important;
+    p {
+        font-size: 15px !important;
     }
 
     nav.sidebar {
         width: 100%;
         height: auto;
         position: relative !important;
-        font-size:9px;
-        padding:0;
-        padding-top:5px;
+        font-size: 9px;
+        padding: 0;
+        padding-top: 5px;
     }
 
     .sidebar ul {
@@ -235,18 +267,33 @@ button#loadMore:hover {
     }
 
     .container {
-        display:block;
+        display: block;
     }
 
-    table{
-        width:100%;
+    table {
+        width: 100%;
     }
 
-    img{
-        width:100%;
+    img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 600px;
+        object-fit: contain;
     }
 
-    header h1, footer p {
+    .plot {
+        width: 100%;
+        max-width: 100%;
+        max-height: 600px;
+    }
+
+    .loadMore {
+        margin-bottom: 30px;
+    }
+
+    header h1,
+    footer p {
         left: 0;
         text-align: center;
     }
@@ -254,6 +301,6 @@ button#loadMore:hover {
     .job-item {
         width: 100%;
         max-width: none;
-        font-size:15px !important;
+        font-size: 15px !important;
     }
 }

@@ -29,7 +29,7 @@ def create_skill_plots():
 
         # Сохраняем график с установленными границами
         plt.tight_layout()
-        plt.savefig(f'analytics/static/img/skills_{year}_plot.png')
+        plt.savefig(f'static/img/skills_{year}_plot.png')
         plt.close()
 
 def plot_skill_counts(df, ax, year):

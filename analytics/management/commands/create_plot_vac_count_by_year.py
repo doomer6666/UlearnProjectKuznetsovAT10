@@ -20,11 +20,12 @@ def create_vac_count_trend_plot():
     df = pd.DataFrame(vac_count_trends)
 
     # Создаем график
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 6))  # Устанавливаем размер графика
     plot_yearly_salaries(df, ax)
 
-    # Сохраняем график
-    plt.savefig('analytics/static/img/vac_count_trend_plot.png')
+    # Сохраняем график с разрешением 1000x600 пикселей
+    plt.tight_layout()
+    plt.savefig('static/img/vac_count_trend_plot.png', dpi=100, bbox_inches='tight')
     plt.show()
 
 

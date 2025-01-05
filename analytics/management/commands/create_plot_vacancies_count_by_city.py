@@ -25,7 +25,7 @@ def create_vacancies_pie_plot():
 
     # Сохраняем график с установленными границами
     plt.tight_layout()
-    plt.savefig('analytics/static/img/vacancies_count_by_city_plot.png')
+    plt.savefig('static/img/vacancies_count_by_city_plot.png')
     plt.show()
 
 

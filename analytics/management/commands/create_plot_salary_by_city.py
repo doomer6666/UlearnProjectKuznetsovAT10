@@ -26,7 +26,7 @@ def create_salary_trend_plot():
 
     # Сохраняем график с установленными границами
     plt.tight_layout()
-    plt.savefig('analytics/static/img/salary_by_city_plot.png')
+    plt.savefig('static/img/salary_by_city_plot.png')
     plt.show()
 
 
