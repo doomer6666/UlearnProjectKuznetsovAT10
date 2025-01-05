@@ -3,12 +3,10 @@ from django.shortcuts import render
 from .models import SalaryByYear, VacanciesCountByYear, SalaryByCity, VacanciesCountByCity, Skill
 from datetime import datetime, timedelta
 
-
 def get_salary_and_vacancy_data():
     salary_trends = SalaryByYear.objects.all()
     vacancy_trends = VacanciesCountByYear.objects.all()
     return salary_trends, vacancy_trends
-
 
 def get_skills_data():
     skills_by_year = {}
@@ -54,7 +52,7 @@ def demand(request):
 
     context = {
         'salary_trends': salary_trends,
-        'vacancy_trends': vacancy_trends,
+        'vacancy_trends':vacancy_trends,
     }
 
     return render(request, 'analytics/demand.html', context)
@@ -65,11 +63,11 @@ def geography(request):
     vacancy_count_by_city = VacanciesCountByCity.objects.all()
 
     context = {
-        'salary_by_area': salary_by_city,
-        'vacancies_by_area': vacancy_count_by_city,
+        'salary_by_area':salary_by_city,
+        'vacancies_by_area':vacancy_count_by_city,
     }
 
-    return render(request, 'analytics/geography.html', context)
+    return render(request, 'analytics/geography.html',context)
 
 
 def skills(request):
@@ -124,7 +122,7 @@ def latest_vacancies(request):
         # Возврат пустого списка, если вакансий не найдено
         return render(request, 'analytics/latest_vacancies.html', {'vacancies': []})
 
-    vacancies = []
+    detailed_vacancies = []
     for vacancy in vacancies:
         # Получение детальной информации о каждой вакансии
         details = get_vacancy_info(vacancy['id'])
@@ -133,7 +131,7 @@ def latest_vacancies(request):
         # Форматирование даты публикации вакансии
         published_at = datetime.strptime(details.get('published_at'), '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M %d.%m.%Y')
 
-        vacancies.append({
+        detailed_vacancies.append({
             'title': details.get('name'),
             'description': details.get('description'),
             'skills': skills_list,
@@ -144,4 +142,4 @@ def latest_vacancies(request):
         })
 
     # Возврат HTML страницы с вакансиями
-    return render(request, 'analytics/latest_vacancies.html', {'vacancies': vacancies})
+    return render(request, 'analytics/latest_vacancies.html', {'vacancies': detailed_vacancies})
