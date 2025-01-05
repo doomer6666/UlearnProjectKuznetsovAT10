@@ -16,11 +16,14 @@ header {
     text-align: center;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 header h1 {
     margin: 0;
     font-size: 40px;
+    padding-left: 200px;
 }
 
 h2 {
@@ -67,7 +70,7 @@ p {
     position: fixed;
     top: 0;
     height: 100%;
-    z-index: 0;
+    z-index: 1;
 }
 
 .sidebar ul {
@@ -187,6 +190,7 @@ button:hover {
 
 .jobs-list {
     display: flex;
+    gap:3em;
     flex-direction: column;
     align-items: center;
     margin: 20px;
@@ -223,7 +227,7 @@ button:hover {
 }
 
 /* Адаптивные стили */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1360px) {
     .row {
         flex-direction: column;
         align-items: flex-start;
@@ -231,8 +235,11 @@ button:hover {
 }
 
 @media screen and (max-width: 768px) {
-    h1 {
-        font-size: 30px !important;
+
+    header h1 {
+        font-size: 30px;
+        margin: 0;
+        padding-left: 0;
     }
 
     h2 {
