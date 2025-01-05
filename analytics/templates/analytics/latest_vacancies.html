@@ -6,9 +6,9 @@
 {% block content %}
 <h3>Последние вакансии</h3>
 <div class="jobs-list">
-    {% for job in jobs %}
+    {% for job in vacancies %}
     <div class="job-item">
-        <h4>{{ job.name }}</h4>
+        <h4>{{ job.title }}</h4>
         <p><strong class="job-p">Компания:</strong> {{ job.company }}</p>
         <p><strong class="job-p">Оклад:</strong> {{ job.salary|default_if_none:"Не указано" }}</p>
         <p><strong class="job-p">Регион:</strong> {{ job.region }}</p>
@@ -20,5 +20,3 @@
     {% endfor %}
 </div>
 {% endblock %}
-
-
