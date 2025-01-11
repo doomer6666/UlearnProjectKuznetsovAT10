@@ -84,13 +84,21 @@ def skills(request):
 def load_vacancies(keywords):
     # Формирование запроса к API по ключевым словам
     url = 'https://api.hh.ru/vacancies'
-    query = f"NAME:({' OR '.join(keywords)})"
+    query = ' OR '.join([f'"{kw}"' for kw in keywords])  # Используем кавычки для целостности ключевых слов
     date_from = (datetime.now() - timedelta(days=1)).isoformat()
     # Параметры запроса к API
-    params = {'text': query, 'date_from': date_from, 'order_by': 'publication_time', 'per_page': '10'}
+    params = {
+        'text': query,
+        'date_from': date_from,
+        'order_by': 'publication_time',
+        'per_page': '15',
+        'search_field': 'name',  # Ищем ключевые слова только в названии вакансии
+    }
     response = requests.get(url, params=params)
     response.raise_for_status()  # Проверка на успешность запроса
-    return response.json().get('items', [])  # Возврат списка вакансий
+    items = response.json().get('items', [])  # Возврат списка вакансий
+    print(f"Загружено вакансий: {len(items)}")  # Отладочная информация
+    return items
 
 
 def get_vacancy_info(vacancy_id):
@@ -100,23 +108,52 @@ def get_vacancy_info(vacancy_id):
     response.raise_for_status()  # Проверка на успешность запроса
     return response.json()
 
-
 def get_salary(salary):
+    # Словарь для перевода идентификаторов валют в названия
+    currency_map = {
+        'RUR': 'рублей',
+        'USD': 'долларов',
+        'EUR': 'евро',
+        'BYN': 'белорусских рублей',
+        'KZT': 'тенге',
+        'UAH': 'гривен',
+        'MDL': 'молдавских леев',
+        'AMD': 'драмов',
+        'AZN': 'манатов',
+        'KGS': 'сомов',
+        'TJS': 'сомони',
+        'UZS': 'сумов',
+        'TMT': 'манатов Туркменистана'
+    }
+
     # Получение и форматирование информации о зарплате
     if not salary:
         return None
-    salary_from, salary_to, currency_id = salary.get('from', ''), salary.get('to', ''), salary.get('currency', '')
-    return (
-        f"от {salary_from} до {salary_to} {currency_id}" if salary_from and salary_to and salary_from != salary_to else
-        f"{salary_from} {currency_id}" if salary_from and salary_to else
-        f"от {salary_from} {currency_id}"
-    )
 
+    salary_from = salary.get('from')
+    salary_to = salary.get('to')
+    currency_id = salary.get('currency', '')
+
+    # Перевод идентификатора валюты в название
+    currency_name = currency_map.get(currency_id, currency_id)
+
+    # Обработка различных случаев
+    if salary_from and salary_to and salary_from != salary_to:
+        return f"от {salary_from} до {salary_to} {currency_name}"
+    elif salary_from and not salary_to:
+        return f"от {salary_from} {currency_name}"
+    elif not salary_from and salary_to:
+        return f"до {salary_to} {currency_name}"
+    elif salary_from == salary_to:
+        return f"{salary_from} {currency_name}"
+    else:
+        return None  # В случае, если все значения отсутствуют или равны None
 
 def latest_vacancies(request):
     # Ключевые слова для поиска вакансий системного администратора
-    keywords = ['Системный администратор', 'system admin', 'сисадмин', 'сис админ', 'системный админ',
+    keywords = ['Системный администратор', 'system administrator', 'сисадмин', 'сис админ', 'системный админ',
                 'администратор систем', 'системний адміністратор']
+
     vacancies = load_vacancies(keywords)
     if not vacancies:
         # Возврат пустого списка, если вакансий не найдено
@@ -124,6 +161,10 @@ def latest_vacancies(request):
 
     detailed_vacancies = []
     for vacancy in vacancies:
+        # Проверка на наличие ключевых слов в названии вакансии
+        if not any(keyword.lower() in vacancy['name'].lower() for keyword in keywords):
+            continue
+
         # Получение детальной информации о каждой вакансии
         details = get_vacancy_info(vacancy['id'])
         salary = details.get('salary', {})
@@ -142,4 +183,4 @@ def latest_vacancies(request):
         })
 
     # Возврат HTML страницы с вакансиями
-    return render(request, 'analytics/latest_vacancies.html', {'vacancies': detailed_vacancies})
+    return render(request, 'analytics/latest_vacancies.html', {'vacancies': detailed_vacancies[:10]})
